@@ -13,7 +13,6 @@ class ArtistsController < ApplicationController
 
   def create
     @artist = Artist.new(params[:artist])
-    @artist.update( date_taken: Time.now.strftime("%B %d, %Y") )
     if @artist.save
       redirect_to "/artists/#{@artist.id}"
     else
