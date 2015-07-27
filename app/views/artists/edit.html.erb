@@ -1,6 +1,7 @@
 <h2>Edit Artist</h2>
 
 <form action="/artists/<%= @artist.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="put">
 
   <label for="artist[name]">Name:</label>
@@ -16,6 +17,7 @@
 </form>
 
 <form action="/artists/<%= @artist.id %>" method="post">
+  <input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
   <input type="hidden" name="_method" value="delete">
   <input class="button-delete" type="submit" value="Delete!">
 </form>

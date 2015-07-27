@@ -1,40 +1,50 @@
 class ArtistsController < ApplicationController
+  # index
   def index
-    @artists = Artist.all.order(:id).reverse
+    @artists = Artist.all
   end
 
-  def show
-    @artist = Artist.find(params[:id])
-  end
-
+  # new
   def new
     @artist = Artist.new
   end
 
+  # create
   def create
-    @artist = Artist.new(params[:artist])
-    if @artist.save
-      redirect_to "/artists/#{@artist.id}"
-    else
-      redirect_to "/posts/new"
-    end
+    @artist = Artist.create!(artist_params)
+
+    redirect_to "/artists/#{@artist.id}"
   end
 
+  #show
+  def show
+    @artist = Artist.find(params[:id])
+  end
+
+  # edit
   def edit
     @artist = Artist.find(params[:id])
   end
 
+
+  # update
   def update
     @artist = Artist.find(params[:id])
-    @artist.update(params[:artist])
+    @artist.update(artist_params)
+
     redirect_to "/artists/#{@artist.id}"
   end
 
+  # destroy
   def destroy
     @artist = Artist.find(params[:id])
     @artist.destroy
-    redirect_to "/"
+
+    redirect_to "/artists"
   end
 
-
+  private
+  def artist_params
+    params.require(:artist).permit(:name, :photo_url, :nationality)
+  end
 end
