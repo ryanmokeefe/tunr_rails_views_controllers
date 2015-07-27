@@ -13,7 +13,6 @@ class SongsController < ApplicationController
 
   def create
     @song = Song.new(params[:song])
-    @song.update( date_taken: Time.now.strftime("%B %d, %Y") )
     if @song.save
       redirect_to "/songs/#{@song.id}"
     else
